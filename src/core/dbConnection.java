@@ -1,3 +1,5 @@
+package core;
+
 import java.lang.String;
 import java.sql.*;
 
@@ -46,7 +48,7 @@ public class dbConnection {
                 return -1;
             }
             int autoIncKeyFromFunc = -1;
-            ResultSet rs = stm.executeQuery("SELECT LAST_INSERT_ID()");
+            ResultSet rs = stm.executeQuery("SELECT LAST_INSERT_ID();");
 
             if (rs.next()) {
                 autoIncKeyFromFunc = rs.getInt(1);
