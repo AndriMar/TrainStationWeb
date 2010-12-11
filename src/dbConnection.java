@@ -22,7 +22,9 @@ public class dbConnection {
             System.out.print(ex.getMessage());
         }
     }
-
+    /*
+     * Opens the conection and makes it ready to use.
+     */
     public void openConnection(String url,String user, String password){
         try{
             con_ = DriverManager.getConnection(url, user, password);
@@ -33,24 +35,38 @@ public class dbConnection {
             System.out.print(ex.getMessage());
         }
     }
-
-    public boolean executeUpdate(String queryString){
+    /*
+     * Executes insert,update and delete queries. Every thing thad dose not return rows.
+     */
+    public int executeUpdate(String queryString){
         try{
             Statement stm = con_.createStatement();
             int updateQuery = stm.executeUpdate(queryString);
             if(updateQuery == 0){
-                return false;
+                return -1;
             }
+            int autoIncKeyFromFunc = -1;
+            ResultSet rs = stm.executeQuery("SELECT LAST_INSERT_ID()");
+
+            if (rs.next()) {
+                autoIncKeyFromFunc = rs.getInt(1);
+            } else {
+                throw new SQLException("Now ID got back from database");
+            }
+
+            rs.close();
+            return autoIncKeyFromFunc;
         }
         catch (SQLException ex)
         {
             System.out.print("Error executing the SQL statement!!");
             System.out.print(ex.getMessage());
-            return false;
+            return -1;
         }
-        return true;
     }
-
+    /*
+     * Executes queries that returns rows, for example select.
+     */
     public ResultSet executeQuery(String queryString){
         ResultSet resultSet = null;
         try{

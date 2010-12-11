@@ -1,5 +1,5 @@
 CREATE TABLE User (
-id INT NOT NULL,
+id INT NOT NULL AUTO_INCREMENT;,
 fullname VARCHAR(100),
 username VARCHAR(100),
 password VARCHAR(100),
@@ -7,23 +7,24 @@ cards INT,
 kt VARCHAR(10),
 CONSTRAINT User_pkey PRIMARY KEY (id)
 );
+alter table User add unique(username);
 
 CREATE TABLE Card(
-id INT NOT NULL,
+id INT NOT NULL AUTO_INCREMENT;,
 balance DOUBLE PRECISION,
 trips INT,
 CONSTRAINT Card_pkey PRIMARY KEY (id)
 );
 
 CREATE TABLE User_has_cards(
-id INT NOT NULL,
+id INT NOT NULL AUTO_INCREMENT;,
 User_id INT NOT NULL,
 Card_id INT NOT NULL,
 CONSTRAINT User_has_cards_pkey PRIMARY KEY (id,User_id,Card_id)
 );
 
 CREATE TABLE Trips(
-id INT NOT NULL,
+id INT NOT NULL AUTO_INCREMENT;,
 depart VARCHAR(100),
 arival VARCHAR(100),
 cost VARCHAR(100),

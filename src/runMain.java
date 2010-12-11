@@ -9,9 +9,9 @@
 public class runMain {
 
     public static void main(String[] args) {
-        dbConnection db = new dbConnection("com.mysql.jdbc.Driver");
-        db.openConnection("jdbc:mysql://localhost:3306/train","train","train");
-        db.executeQuery("select * from users;");
+        businessLogic BL = new businessLogic();
+        BL.createUser("Andri Mar Björgvinsson","andri","andri","0408823919");
+
 
     }
 }
